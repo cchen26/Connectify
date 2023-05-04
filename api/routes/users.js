@@ -1,5 +1,8 @@
-const User = require("../models/User");
-const router = require("express").Router();
+import { Router } from "express";
+import User from "../models/User.js";
+import bcrypt from "bcrypt";
+
+const router = Router();
 
 //Update user
 router.put("/:id", async (req, res) => {
@@ -120,4 +123,4 @@ router.put("/:id/unfollow", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

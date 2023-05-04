@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const userRoute = require("./routes/users");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import helmet from "helmet";
+import morgan from "morgan";
+import userRoute from "./routes/users.js";
 
 dotenv.config();
 
