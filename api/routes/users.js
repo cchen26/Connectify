@@ -21,7 +21,9 @@ router.put("/:id", async (req, res) => {
       return res.status(500).json(err);
     }
   } else {
-    return res.status(403).json("You can only update your account!");
+    return res
+      .status(403)
+      .json("You are only allowed to update your own account!");
   }
 });
 
@@ -35,7 +37,9 @@ router.delete("/:id", async (req, res) => {
       return res.status(500).json(err);
     }
   } else {
-    return res.status(403).json("You can only delete your account!");
+    return res
+      .status(403)
+      .json("You are only allowed to delete your own account!");
   }
 });
 
@@ -85,13 +89,13 @@ router.put("/:id/follow", async (req, res) => {
         await currentUser.updateOne({ $push: { followings: req.params.id } });
         res.status(200).json("User followed");
       } else {
-        res.status(403).json("You already follow this user");
+        res.status(403).json("You already follow them");
       }
     } catch (err) {
       res.status(500).json(err);
     }
   } else {
-    res.status(403).json("You cannot follow yourself!");
+    res.status(403).json("Sorry, you can't follow yourself");
   }
 });
 
@@ -106,7 +110,7 @@ router.put("/:id/unfollow", async (req, res) => {
         await currentUser.updateOne({ $pull: { followings: req.params.id } });
         res.status(200).json("User unfollowed");
       } else {
-        res.status(403).json("You are not following this user");
+        res.status(403).json("Not following this user");
       }
     } catch (err) {
       res.status(500).json(err);
