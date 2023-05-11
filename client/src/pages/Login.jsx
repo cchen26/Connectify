@@ -1,8 +1,8 @@
 import { useContext, useRef } from "react";
-import { loginCall } from "client/src/services/apiService.js";
-import { AuthContext } from "../../context/AuthContext";
-import { CircularProgress } from "@material-ui/core";
-import "client/src/styles/register.css";
+import { loginCall } from "../services/apiService.js";
+import { AuthContext } from "../context/AuthContext";
+import CircularProgress from "@mui/material/CircularProgress";
+import "../styles/register.css";
 
 export default function Login() {
   const email = useRef();
@@ -21,9 +21,9 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
+          <h3 className="loginLogo">Connectify</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you on Connectify.
           </span>
         </div>
         <div className="loginRight">

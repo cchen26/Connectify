@@ -1,4 +1,4 @@
-import "client/src/styles/close-friend.css";
+import "../styles/close-friend.css";
 
 export default function CloseFriend({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;

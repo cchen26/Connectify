@@ -1,8 +1,8 @@
-import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Feed from "../../components/feed/Feed";
-import Rightbar from "../../components/rightbar/Rightbar";
-import "client/src/styles/home.css";
+import Topbar from "../components/TopBar";
+import Sidebar from "../components/SideBar";
+import Feed from "../components/Feed";
+import Rightbar from "../components/RightBar";
+import "../styles/home.css";
 
 export default function Home() {
   return (

@@ -1,11 +1,11 @@
-import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Feed from "../../components/feed/Feed";
-import Rightbar from "../../components/rightbar/Rightbar";
+import Topbar from "../components/TopBar";
+import Sidebar from "../components/SideBar";
+import Feed from "../components/Feed";
+import Rightbar from "../components/RightBar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import "client/src/styles/register.css";
+import "../styles/register.css";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;

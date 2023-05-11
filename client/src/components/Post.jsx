@@ -1,10 +1,10 @@
-import { MoreVert } from "@material-ui/icons";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import "client/src/styles/post.css";
+import { AuthContext } from "../context/AuthContext";
+import "../styles/post.css";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -52,7 +52,7 @@ export default function Post({ post }) {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <MoreVertIcon />
           </div>
         </div>
         <div className="postCenter">

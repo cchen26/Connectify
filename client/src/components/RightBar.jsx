@@ -1,11 +1,12 @@
-import { Users } from "../../dummyData";
-import Online from "../online/Online";
+import { Users } from "../data/dummyData";
+import Online from "./Online";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { Add, Remove } from "@material-ui/icons";
-import "client/src/styles/right-bar.css";
+import { AuthContext } from "../context/AuthContext";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import "../styles/right-bar.css";
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -70,7 +71,7 @@ export default function Rightbar({ user }) {
         {user.username !== currentUser.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
             {followed ? "Unfollow" : "Follow"}
-            {followed ? <Remove /> : <Add />}
+            {followed ? <RemoveIcon /> : <AddIcon />}
           </button>
         )}
         <h4 className="rightbarTitle">User information</h4>
