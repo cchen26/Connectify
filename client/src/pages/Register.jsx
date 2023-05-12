@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import "../styles/register.css";
 
 export default function Register() {
@@ -8,12 +8,12 @@ export default function Register() {
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
     if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
+      passwordAgain.current.setCustomValidity("Passwords do not match!");
     } else {
       const user = {
         username: username.current.value,
@@ -22,7 +22,7 @@ export default function Register() {
       };
       try {
         await axios.post("/auth/register", user);
-        history.push("/login");
+        navigate.push("/login");
       } catch (err) {
         console.log(err);
       }
