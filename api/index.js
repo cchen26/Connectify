@@ -1,19 +1,26 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import helmet from "helmet";
-import morgan from "morgan";
-import userRoute from "./routes/users.js";
-import authRoute from "./routes/auth.js";
-import postRoute from "./routes/posts.js";
-import path from "path";
-const router = express.Router();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+
+//routes
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/posts");
+const uploadRoutes = require("./routes/upload");
+
+const path = require("path");
 
 dotenv.config();
 
+const PORT = 8800;
+const URL = process.env.CONNECTION_URL;
+
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -23,35 +30,38 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB", err);
   });
+
+//Cross origin
+app.use((req, res, next) => {
+  const allowedOrigins = ["http://localhost:3000"];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Methods", "GET, OPTIONS, PUT");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", true);
+  return next();
+});
+
+//Access image path directly
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //Middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/posts", postRoutes);
+app.use("/api/v1/upload", uploadRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the homepage");
 });
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  try {
-    return res.status(200).json("File uploded successfully!");
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
-app.use("/api/posts", postRoute);
-
-app.listen(8800, () => {
-  console.log("Backend server running!");
+app.listen(PORT, () => {
+  console.log(`Backend server is running on port ${PORT}`);
 });

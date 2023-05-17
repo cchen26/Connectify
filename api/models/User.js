@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      min: 8,
+      min: 6,
     },
     profilePicture: {
       type: String,
@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    desc: {
+    description: {
       type: String,
       max: 50,
     },
@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
-    relationship: {
+    relationships: {
       type: Number,
       enum: [1, 2, 3],
     },
@@ -60,4 +60,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

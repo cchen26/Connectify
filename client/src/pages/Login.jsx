@@ -1,12 +1,15 @@
 import { useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginCall } from "../services/apiService.js";
 import { AuthContext } from "../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
-import "../styles/register.css";
+import "../styles/login.css";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
+  const navigate = useNavigate();
+
   const { isFetching, dispatch } = useContext(AuthContext);
 
   const handleClick = (e) => {
@@ -21,12 +24,21 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Connectify</h3>
-          <span className="loginDesc">
-            Connect with friends and the world around you on Connectify.
-          </span>
+          <div className="registerLogo">
+            <img src="assets/social.png" alt="logo" />
+            <h3 className="registerLogo">Connectify</h3>
+          </div>
+          <img
+            src="assets/Testimonial.png"
+            alt="welcome"
+            height={450}
+            width={450}
+          />
         </div>
         <div className="loginRight">
+          <div>
+            <h1 className="loginRight-heading">Log into Your Account</h1>
+          </div>
           <form className="loginBox" onSubmit={handleClick}>
             <input
               placeholder="Email"
@@ -40,24 +52,20 @@ export default function Login() {
               type="password"
               required
               minLength="6"
-              className="loginInput"
+              className="loginInput passwordInput"
               ref={password}
             />
             <button className="loginButton" type="submit" disabled={isFetching}>
               {isFetching ? (
-                <CircularProgress color="white" size="20px" />
+                <CircularProgress color="inherit" size="20" />
               ) : (
                 "Log In"
               )}
             </button>
-            <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              {isFetching ? (
-                <CircularProgress color="white" size="20px" />
-              ) : (
-                "Create a New Account"
-              )}
-            </button>
+            <p className="callToRegister">
+              Don't have an account ?{" "}
+              <span onClick={() => navigate("/register")}>Register</span>
+            </p>
           </form>
         </div>
       </div>

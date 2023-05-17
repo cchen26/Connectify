@@ -28,11 +28,11 @@ export default function Share() {
       newPost.img = fileName;
       console.log(newPost);
       try {
-        await axios.post("/upload", data);
+        await axios.post("http://localhost:8800/api/v1/upload", data);
       } catch (err) {}
     }
     try {
-      await axios.post("/posts", newPost);
+      await axios.post("http://localhost:8800/api/v1/posts", newPost);
       window.location.reload();
     } catch (err) {}
   };
