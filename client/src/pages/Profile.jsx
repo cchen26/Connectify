@@ -1,10 +1,9 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Feed from "../components/Feed";
 import RightBar from "../components/RightBar";
 import Topbar from "../components/TopBar";
-import { AuthContext } from "../context/AuthContext";
 import ProfileImg from "../images/avatar.png";
 import CoverImg from "../images/cover.jpg";
 import "../styles/profile.css";
@@ -14,7 +13,6 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const params = useParams();
 
-  const { user: currentUser } = useContext(AuthContext);
   const username = params.username;
 
   useEffect(() => {
